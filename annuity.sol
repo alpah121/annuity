@@ -16,6 +16,29 @@
 pragma ^0.4.4;
 
 contract annuity {
-uint monthlyPayment = 300;
-uint 
+uint recommendedPayment = 0.003;
+uint monthlyWithdraw = 1;
+enum Status {deposit, confirm, withdraw}
+Status public status;
+
+struct Payment {
+	uint timestamp;
+	uint amount;
+}
+
+Payment[] payments;
+uint totalPayments; 
+
+function deposit() public payable
+	{
+	require(msg.value > 0);
+	payments.push(Payment(block.timestamp, msg.value));
+	totalPayments += 1;
+	}
+	
+function withdraw() public 
+	{
+	require(status == Status.withdraw);
+	
+	}
 }
